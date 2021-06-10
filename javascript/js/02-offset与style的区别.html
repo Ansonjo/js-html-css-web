@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 
+        内部样式表
+        就是将CSS在写html页面内部。是将所有的CSS代码抽取出来，单独放到一个<style>标签中
+    -->
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            padding: 10px;
+        }
+    </style>
+    
+    <link href="外部样式表.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+    <!-- 
+        行内样式表
+        是在元素标签内部的style属性中设定CSS样式。适合于修改简单样式
+    -->
+    <div class="box" style="width: 200px;"></div>
+
+    <div class="box2"></div>
+    <script>
+        // offset与style的区别
+        /*
+            offsetWidth是只读的,
+        */
+        var box = document.querySelector('.box');
+        console.log(box.offsetWidth);
+        console.log(box.style.width);
+        // box.offsetWidth = '300px';
+        box.style.width = '300px';
+    </script>
+</body>
+
+</html>
