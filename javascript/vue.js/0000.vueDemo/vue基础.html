@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue基础</title>
+    <script src="vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        {{person}}
+        {{person.uName}}
+        {{person.age}}
+    </div>
+    <script>
+        var app = new Vue({
+            el:"#app",//<div id="app">
+            data:{
+                message:'hai Vue!',//{{message}}
+                person:{
+                    uName:'anson',
+                    age:22
+                },
+                index:0
+            },
+            //创建new Vue之后,创建el和data之前,页面中的{{message}} {{person}}{{person.uName}} {{person.age}}还没被替换
+            beforeCreate:function() {
+                console.log(this.el);//undefined
+                console.log(this.index + ".beforeCreate");
+                this.index++;
+            },
+            //创建data之后,页面中的{{message}} {{person}}{{person.uName}} {{person.age}}还没被替换
+            created() {
+                console.log(this.el);//undefined
+                console.log(this.index + ".created");
+                this.index++;
+            },
+            //created之后,页面中的{{message}} {{person}}{{person.uName}} {{person.age}}还没被替换
+            beforeMount() {
+                console.log(this.el);//undefined
+                console.log(this.index + ".beforeMount");
+                this.index++;
+            },
+            //el被挂载以后也就是onload之后,页面中的{{message}} {{person}}{{person.uName}} {{person.age}}已经被替换
+            mounted() {
+                console.log(this.el);
+                console.log(this.index + ".mounted");
+                this.index++;
+            },
+            beforeUpdate() {
+                console.log(this.index + ".beforeUpdate");
+                this.index++;
+            },
+            updated() {
+                console.log(this.index + ".updated");
+                this.index++;
+            },
+            beforeDestroy() {
+                console.log(this.index + ".beforeDestroy");
+                this.index++;
+            },
+            destroyed() {
+                console.log(this.index + ".destroyed");
+                this.index++;
+            },
+        })
+        </script>
+</body>
+</html>

@@ -30,9 +30,12 @@
         var timer = setInterval(function() {
             if (div.offsetLeft >= 400) {
                 // 停止动画 本质是停止定时器
+                var t = timer +1;
                 clearInterval(timer);
+            
+                console.log(t);
             }
-            div.style.left = div.offsetLeft + 1 + 'px';
+            div.style.left = div.offsetLeft + 5 + 'px';
         }, 30);
     </script>
 </body>

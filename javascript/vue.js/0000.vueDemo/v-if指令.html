@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="vue.js" type="text/javascript" charset="utf-8"></script>
+    <title>v-if指令</title>
+
+</head>
+<body>
+    <div id="app">
+        <input type="button" :value='btnText+"!!!!"' @click="changeIsShow">
+        <p v-show="isShow">v-show</p>
+        <p v-if="isShow">v-if</p>
+    </div>
+    <script>
+        // is-if作用: 直接移除标签,来达到隐藏元素的效果
+        //is-if:效率低一点
+        var app = new Vue({
+            el:"#app",//<div id="app">
+            data:{
+                isShow:false,
+                btnText:"显示"
+            },
+            methods: {
+                changeIsShow(){
+                    this.isShow = !this.isShow;
+                    this.btnText = this.isShow ? "隐藏" : "显示";
+                }
+            },
+        })
+        </script>
+</body>
+</html>

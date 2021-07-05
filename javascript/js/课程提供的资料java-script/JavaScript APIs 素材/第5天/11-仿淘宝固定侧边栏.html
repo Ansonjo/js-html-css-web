@@ -38,7 +38,7 @@
         }
         
         span {
-            display: none;
+            display: block;
             position: absolute;
             bottom: 0;
         }
@@ -49,16 +49,22 @@
     <div class="slider-bar">
         <span class="goBack">返回顶部</span>
     </div>
+    <!-- ^^class="header w,为什么类名不是header w,w是什么 -->
     <div class="header w">头部区域</div>
     <div class="banner w">banner区域</div>
     <div class="main w">主体部分</div>
     <script>
         //1. 获取元素
         var sliderbar = document.querySelector('.slider-bar');
+        console.log(sliderbar.offsetLeft);
         var banner = document.querySelector('.banner');
-        // banner.offestTop 就是被卷去头部的大小 一定要写到滚动的外面
-        var bannerTop = banner.offsetTop
+        console.log(banner.offsetLeft);
+        alert((document.documentElement.offsetWidth-1200)/ 2 );
+        // banner.offestTop 就是被卷去头部的大小 一定要写到滚动的外面,因为此时是初始状态,还没有滚动
+        var bannerTop = banner.offsetTop;
+        // alert(bannerTop);
             // 当我们侧边栏固定定位之后应该变化的数值
+            // alert(sliderbar.offsetTop);
         var sliderbarTop = sliderbar.offsetTop - bannerTop;
         // 获取main 主体元素
         var main = document.querySelector('.main');

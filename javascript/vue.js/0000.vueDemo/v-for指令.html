@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="vue.js" type="text/javascript" charset="utf-8"></script>
+    <title>v-for指令</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="添加数据" @click="add">
+        <input type="button" value="移除数据" @click="remove">
+
+        <ul>
+            <li v-for="item in arr">
+                达内校区:{{ item }}
+            </li>
+        </ul>
+        <ul>
+            <li v-for="(it,idx) in arr">
+                {{ idx+1 }}.尚硅谷校区:{{ it }}
+            </li>
+        </ul>
+        <ul>
+            <li v-for="(it,index) in arr">
+                {{ index+1 }}黑马程序员校区:{{ it }}
+            </li>
+        </ul>
+        <!-- 注意：如果使用v-for迭代数字的话，前面 count 的值从 1 开始-->
+        <p v-for="count in 10">这是第{{count}}次循环</p>
+
+        <h1 v-for="item in vegetables">
+            {{ item }}
+        </h1>
+        <h2 v-for="item in vegetables" v-bind:title="item.name">
+            {{ item.name }}
+        </h2>
+    </div>
+    <!-- 1.开发环境版本，包含了有帮助的命令行警告 -->
+    <script>
+        //v-for
+        var app = new Vue({
+            el:"#app",
+            data:{
+                arr:["北京","上海","广州","深圳"],
+                vegetables:[
+                    {name:"西兰花炒蛋"},
+                    {name:"蛋炒西蓝花"}
+                ]
+            },
+            methods: {
+                add:function(){
+                    console.log(this);
+                    this.vegetables.push({ name:"花菜炒蛋" });
+                    (function(){
+                        console.log(this);
+                    }());
+                },
+                remove:function(){
+                    this.vegetables.shift();
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

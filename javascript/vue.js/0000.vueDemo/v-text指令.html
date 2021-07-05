@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="vue.js" type="text/javascript" charset="utf-8"></script>
+    <title>v-text指令</title>
+
+</head>
+<body>
+    <div id="app">
+        <h2 v-text="message + '!'">深圳</h2>
+        <h2 v-text="info + '!'">深圳</h2>
+        <h2>{{message + '!'}}深圳</h2>
+    </div>
+    <script>
+        //v-text指令的作用: 设置标签的内容(textContent)innerText
+        //默认写法会替换全部内容,使用差值表达值{{}}可以替换指定内容
+        //内部支持写表达式
+        var app = new Vue({
+            el:"#app",//<div id="app">
+            data:{
+                message:'黑马程序员!!!',
+                info:'前端与移动教研部'
+            }
+        })
+        </script>
+</body>
+</html>

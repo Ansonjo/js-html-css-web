@@ -12,9 +12,22 @@
 <body>
 
     <script>
+        //出发load事件的3种情况
+        //1.a标签的超链接
+        //2.强制刷新F5等
+        //3.前进后退
+
+        //但是在火狐中,有往返缓存,这个缓存中不仅保存着页面数据,还保存了DOM和javascript的状态,实际上是将整个页面保存在了内存里
+        //所以此时后退不会刷新页面,就不会触发load事件
+
+        //而pageshow事件会被触发,这个事件是在页面显示时触发,无论页面是否来自缓存;
+        //pageshow会在load事件之后触发,根据事件对象的persisted来判断是否是缓存中的页面触发的pageshow事件,注意这个事件给window添加
+
         // console.log(window.devicePixelRatio);
-        window.addEventListener('pageshow', function() {
-            alert(11);
+        window.addEventListener('pageshow', function(e) {
+            // e.persisted 返回的是true 就是说如果这个页面是从缓存取过来的页面，也需要从新计算一下rem 的大小
+
+            alert(e.persisted);
         })
     </script>
     <a href="http://www.itcast.cn">链接</a>

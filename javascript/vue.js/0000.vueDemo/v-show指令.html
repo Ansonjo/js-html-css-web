@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="vue.js" type="text/javascript" charset="utf-8"></script>
+    <title>v-show指令</title>
+
+</head>
+<body>
+    <div id="app">
+        <button @click="changeIsShow">{{btnText}}</button>
+        <img v-show="isShow" src="./img/图片1.gif" alt="">
+    </div>
+    <script>
+        // is-show作用: 就是操纵style.display属性
+        var app = new Vue({
+            el:"#app",//<div id="app">
+            data:{
+                isShow:false,
+                btnText:"显示"
+            },
+            methods: {
+                changeIsShow(){
+                    this.isShow = !this.isShow;
+                    this.btnText = this.isShow ? "隐藏" : "显示";
+                }
+            },
+        })
+        </script>
+</body>
+</html>

@@ -20,9 +20,14 @@
 <body>
     <div></div>
     <script>
+        //clientTop    返回元素上边框大小
+        //clientLeft   返回元素左边框大小
         // client 宽度 和我们offsetWidth 最大的区别就是 不包含边框
         var div = document.querySelector('div');
-        console.log(div.clientWidth);
+        console.log('clientWidth: ' + div.clientWidth);
+        console.log('clientTop: ' + div.clientTop);
+        console.log('clientLeft: ' + div.clientLeft);
+
     </script>
 </body>
 
