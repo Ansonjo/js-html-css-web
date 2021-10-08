@@ -1,0 +1,7 @@
+# Windows thumbnail cache files
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+.history/
