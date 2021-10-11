@@ -712,7 +712,7 @@ typora-root-url: ./md_imgs
    	<li>内容区域 content (<b>类似里面的手机</b>)</li>    
        <li>内边距区域 padding  (<b>类似手机和包装盒内部的之间的间隙</b>)</li>
        <li>边框区域 border (<b>类似包装盒的厚度</b>)</li>
-       <li>外边距区域 margin (<b>类似两个包装盒之间的距离</b>)</li>
+       <li>外边距区域 margin (<b>类似包装盒和墙或者其他盒子之间的距离,比如距离body</b>)</li>
    </ul>
 
 <img src="https://i.loli.net/2021/10/09/mvGtOW3H9uV2D8g.png" alt="image-20211009160327110" style="zoom:67%;" />
@@ -723,5 +723,238 @@ typora-root-url: ./md_imgs
 
 ###### ![image-20211009164514222](https://i.loli.net/2021/10/09/K8NryQJVdqEFpfx.png)
 
+##### 3.1 边框 ( border ) - 单个属性
 
+作用: 给设置边框粗细、边框样式、边框颜色效果
+
+单个属性：
+
+###### ![image_20211011100207.png](https://i.loli.net/2021/10/11/5VLmCJAEqSWGjbM.png)
+
+##### 3.2 边框 ( border ) - 连写形式
+
+###### ![image_20211011143450](https://i.loli.net/2021/10/11/w8WBFPrMOJUDpjf.png)
+
+##### 3.3边框 ( border ) - 单方向设置
+
+场景: 只给盒子的某个方向单独设置边框
+
+属性名: border-方向名词(top bottom left right)
+
+属性值: 连写的取值
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Document</title>
+</head>
+<style>
+    .d {
+        width: 400px;
+        height: 400px;
+        background-color: skyblue;
+
+        /* 1.单个属性 */
+        /* border-width: 2px; */
+        /* border-style: solid; */
+        /* border-color: red; */
+
+        /* 2.连写形式 */
+        border: 10px solid greenyellow;
+        padding: 100px ;
+        margin: 100px;
+        /* 3.单方向设置 */
+        /* border-top: 10px solid #000; */
+        /* border-bottom: 10px solid #000; */
+        /* border-left: 10px solid #000; */
+        /* border-right: 10px solid #000; */
+    }
+</style>
+<body>
+    <div class="d"></div>     
+</body>
+</html>
+```
+
+##### 3.4盒子实际大小初级计算公式
+
+要求: 盒子尺寸 400x400, 背景绿色, 边框10px 实线 黑色, 如果完成?
+
+​	==注意点: 1) 设置width和height是内容区域的宽高 2) 设置border会撑大盒子==
+
+盒子实际大小初级计算公式:
+
+​	盒子宽度 = 左边框 + 内容宽度 + 右边框
+
+​	盒子高度 = 上边框 + 内容高度 + 下边框
+
+解决: 当盒子被border撑大后,如何满足需求?
+
+<img src="https://i.loli.net/2021/10/11/WXoxhJZi2QDpFmC.png" alt="image-20211011144547667" style="zoom: 67%;" />
+
+##### 3.5新浪导航案例
+
+###### <img src="https://i.loli.net/2021/10/11/wl6xSZTXqML7mup.png" alt="image-20211011151657752" style="zoom:70%;" />
+
+布局顺序:
+
+1.  从外往内, 从上往下
+
+每一个盒子的样式
+
+1. 宽高
+2. 辅助的背景颜色
+3. 盒子模型的部分: border 、padding、margin
+4. 其他样式： color、font-、text-、......
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Document</title></head>
+<style>
+    /* 清除标签默认的margin和padding */
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .d {
+        height: 40px;
+        /* background-color: skyblue; */
+
+        border-top: 3px solid #ff8500;
+        border-bottom: 1px solid #edeef0;
+    }
+    .d a{
+        width: 80px;
+        height: 40px;
+        /* background-color: pink; */
+        color: #4c4c4c;
+        font-size: 12px;
+        text-decoration: none;
+        /* 转换行内块 */
+        display: inline-block;
+        text-align: center;
+        line-height: 40px;
+    }
+    .d a:hover{
+        background-color: #edeef0;
+        color: #ff8400;
+    }
+</style>
+<body>
+    <div class="d">
+        <!-- a便签换行写的话,浏览器会把换行识别为空格,导致它们之间产生间隙,所以标签之前不要有空格和换行,如果在一行的时候 -->
+        <a href="#">新浪导航</a><a href="#">新浪导航</a><a href="#">新浪导航</a><a href="#">新浪导航</a>
+    </div>     
+</body>
+</html>
+```
+
+
+
+##### 4.1 内边距 ( padding ) - 取值
+
+作用: 设置 ==边框== 与 ==内容区域== 之间的距离
+
+属性名: padding
+
+常见取值:
+
+###### ![image-20211011164240294](https://i.loli.net/2021/10/11/aBfuHUKVeWh7oXZ.png)
+
+记忆规则: ==从上开始赋值, 然后顺时针赋值, 如果没有值,就把对面的值赋给它==
+
+##### 4.2 内边距 ( padding ) - 单方向取值
+
+场景: 只给盒子的某个方向单独设置内边距
+
+属性名: padding-方向名词
+
+属性值: 数字 + px
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8">title>Document</title></head>
+<style>
+    .d {
+        width: 100px;
+        height: 100px;
+        background-color: skyblue;
+        border: 1px solid #000;
+
+        /* 1. padding的取值 */
+        /* padding: 10px; */
+        /* padding: 10px 20px; */
+        /* padding: 10px 20px 30px; */
+        /* padding: 10px 20px 30px 40px; */
+
+        /* 2. padding的单方向取值 */
+        padding-left: 20px;
+    }
+</style>
+<body>
+    <div class="d">我是内容我是内容我是内容我是内容我是内容我是内容</div>     
+</body>
+</html>
+```
+
+##### 4.3 新浪导航案例
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Document</title></head>
+<style>
+    /* 清除标签默认的margin和padding */
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .d {
+        height: 40px;
+        /* background-color: skyblue; */
+
+        border-top: 3px solid #ff8500;
+        border-bottom: 1px solid #edeef0;
+    }
+    .d a{
+        /* 转换行内块 */
+        display: inline-block;
+        /* width: 80px; */
+        height: 40px;
+        /* 设置padding文字就不会津贴边框 */
+        padding: 0 20px;
+        /* background-color: pink; */
+        color: #4c4c4c;
+        font-size: 12px;
+        text-decoration: none;
+        text-align: center;
+        line-height: 40px;
+    }
+    .d a:hover{
+        background-color: #edeef0;
+        color: #ff8400;
+    }
+</style>
+<body>
+    <div class="d">
+    	<!-- 当设置了标签宽度,放不下的内容就会换行显示,不设置就会根据内容自动改变宽度 -->
+        <a href="#">新浪导航</a><a href="#">新浪导航新浪导航新浪导航</a><a href="#">新浪导航</a><a href="#">新浪导航</a>
+    </div>     
+</body>
+</html>
+```
+
+
+
+##### 4.4 不会撑大盒子的特殊情况
+
+==需要满足以下条件==: 
+
+1. 是块级元素
+2. 子盒子没有设置宽度, 父盒子设置了宽度
+3. 设置的左右padding和左右border之和不大于父盒子的宽度
+
+此时,设置左右padding和左右border不会撑大盒子
 
