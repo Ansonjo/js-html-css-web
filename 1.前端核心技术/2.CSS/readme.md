@@ -956,5 +956,711 @@ typora-root-url: ./md_imgs
 2. 子盒子没有设置宽度, 父盒子设置了宽度
 3. 设置的左右padding和左右border之和不大于父盒子的宽度
 
-此时,设置左右padding和左右border不会撑大盒子
+此时,设置==左右padding==和==左右border==不会撑大盒子
+
+##### 4.5 CCS3盒模型 ( 自动内减 )
+
+需求: 盒子尺寸 300*300, 背景粉色, 边框10px 实线 黑色, 上下左右20px的内边距, 如何完成?
+
+
+
+解决方法1 : 手动内减 ( 手动修改内容宽度高度 )
+
+
+
+解决方法2: 自动内减 (设置box-sizing: border-box;)
+
+
+
+##### 5.1 外边距 ( margin ) - 取值
+
+作用: 设置边框之外, ==盒子与盒子==之间的距离
+
+常见取值:
+
+###### ![image-20211012130618525](https://i.loli.net/2021/10/12/EkHWpy85L3YiQAt.png)
+
+记忆规则: ==从上开始赋值, 然后顺时针赋值, 如果没有值,就把对面的值赋给它==
+
+##### 5.2 外边距 ( margin ) - 单方向取值
+
+场景: 只给盒子的某个方向单独设置外边距
+
+属性名: margin -方向名词
+
+属性值: 数字 + px
+
+
+
+##### 5.3 margin单方向设置的应用
+
+###### ![image-20211012131857010](https://i.loli.net/2021/10/12/DHtLRrQp4JxWE1A.png)
+
+
+
+
+
+###### ![image-20211012135948873](https://i.loli.net/2021/10/12/PnBpMRd6qvUsKWC.png)
+
+
+
+###### ![image-20211012140140758](https://i.loli.net/2021/10/12/Ie4sKciyDf8NSxJ.png)
+
+##### 5.7 外边距折叠现象 - 合并现象
+
+场景: 垂直布局 和 块级元素, 上下的margin会合并
+
+结果: 最终两者距离margin的最大值
+
+解决方法: 避免就好
+
+​	==只给其中一个盒子设置margin即可==
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><title>Document</title>
+  <style>
+    /* 清除标签默认的margin和padding */
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    div{
+      width: 300px;
+      height: 300px;
+    }
+    .red {
+        background-color: red;
+        margin-bottom: 100px;
+    }
+    .blue {
+        background-color: blue;
+        margin-top: 200px;
+    }
+  </style>
+</head>
+<body>
+    <div class="red"></div>
+    <div class="blue"></div>
+</body>
+</html>
+```
+
+
+
+##### 5.8 外边距折叠现象 - 塌陷现象
+
+场景: 互相嵌套 的  块级元素, 子元素的==margin-top会作用在父元素上==,导致父元素和子元素一起移动了
+
+结果: 导致父元素一起移动
+
+解决方法:
+
+1. 给父元素设置border-top或者padding-top(极少使用)
+2. 给父元素设置overflow: hidden (==经常使用==)
+3. 转换成行内块元素
+4. 设置浮动
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><title>Document</title>
+  <style>
+    /* 清除标签默认的margin和padding */
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .father {
+      width: 400px;
+      height: 400px;
+      background-color: skyblue;
+    }
+    .father .son {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+        margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+    <div class="father">
+        <div class="son"></div>
+    </div>
+</body>
+</html>
+```
+
+
+
+##### 5.9 行内元素的margin和padding无效情况
+
+场景: 给行内元素设置margin和padding时, 比如span标签
+
+结果: 
+
+1. 水平方向的margin和padding布局中有效
+2. 垂直方向的margin和padding布局中无效
+
+##### ![image-20211013135208491](https://i.loli.net/2021/10/13/Xs7ZQ3dNlE6SMjv.png)
+
+
+
+###### ![image-20211013135329958](https://i.loli.net/2021/10/13/NksjB9fHay7CrXm.png)
+
+公式顺序不能改,必须-n+5不能写成5-n, 否则失效
+
+###### ![image-20211013135817140](https://i.loli.net/2021/10/13/zS7QIF9g1XJo86b.png)
+
+
+
+###### ![image-20211013135923616](https://i.loli.net/2021/10/13/2dyTtXF7iwMem6j.png)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 清除标签默认的margin和padding */
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .father {
+      width: 300px;
+      height: 300px;
+      background-color: skyblue;
+    }
+    .father::after {
+        content: "我是后伪元素";
+        display: inline-block;
+        height: 100px;
+        color: #fff;
+        background-color: blue;
+    }
+    .father::before {
+        content: "我是前伪元素";
+        display: inline-block;
+        height: 100px;
+        background-color: orange;
+    }
+  </style>
+</head>
+<body>
+    <div class="father"></div>
+</body>
+</html>
+```
+
+
+
+###### ![image-20211013150149441](https://i.loli.net/2021/10/13/ptzgRB1rfUqAObS.png)
+
+
+
+
+
+## 浮动
+
+1. 作用 
+2. 代码
+3. 特点
+4. 案例
+
+
+
+##### 1.1 作用
+
+1. 早期的作用: 图文环绕
+2. 现在的作用: 网页布局
+
+###### ![image-20211013151140943](https://i.loli.net/2021/10/13/gsrAhV5XBe1lpjk.png)
+
+==即使浏览器的窗口宽度改变,他们也是一个在最左边一个在最右边==
+
+##### 2.1 代码
+
+属性名: float
+
+属性值:
+
+###### ![image-20211013151304493](https://i.loli.net/2021/10/13/Pqet1WL3JhEzA9w.png)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Document</title>
+  <style>
+    /* 清除标签默认的margin和padding */
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .left {
+      width: 200px;
+      height: 200px;
+      background-color: skyblue;
+      float: left;
+    }
+    .right {
+        width: 200px;
+        height: 200px;
+        background-color: blue;
+        float: right;
+    }
+  </style>
+</head>
+<body>
+    <div class="left"></div>
+    <div class="right"></div>
+</body>
+</html>
+```
+
+
+
+##### 3.1 特点
+
+1. 浮动元素会脱离标准流 ( 简称: 脱标 ) , 在标准流中不占位置 ( 仅仅对于块级元素而言 )
+
+   ```html
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+     <meta charset="UTF-8">
+     <title>Document</title>
+     <style>
+       /* 清除标签默认的margin和padding */
+       * {
+         margin: 0;
+         padding: 0;
+       }
+       div {
+         width: 200px;
+         height: 200px;
+       }
+       .red {
+           background-color: red;
+       }
+       .green {
+           background-color: green;
+           float: right;
+       }
+       .blue {
+           background-color: blue;
+       }
+     </style>
+   </head>
+   <body>
+   <div class="red"></div>
+   <div class="green"></div>
+   <div class="blue"></div>
+       
+   </body>
+   </html>
+   ```
+
+2. 浮动元素比标准流高半个级别在显示上, 可以覆盖标准流中的元素
+
+   ```html
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+     <meta charset="UTF-8">
+     <title>Document</title>
+     <style>
+       /* 清除标签默认的margin和padding */
+       * {
+         margin: 0;
+         padding: 0;
+       }
+       div {
+         width: 200px;
+         height: 200px;
+       }
+       .red {
+           background-color: red;
+       }
+       .green {
+           background-color: green;
+           float: left;
+       }
+       .blue {
+           width: 240px;
+         	height: 240px;
+           background-color: blue;
+       }
+     </style>
+   </head>
+   <body>
+   <div class="red"></div>
+   <div class="green"></div>
+   <div class="blue"></div>
+       
+   </body>
+   </html>
+   ```
+
+   
+
+3. 浮动找浮动, 下一个浮动元素会在上一个浮动元素后面左右浮动
+
+   ```html
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+     <meta charset="UTF-8">
+     <title>Document</title>
+     <style>
+       /* 清除标签默认的margin和padding */
+       * {
+         margin: 0;
+         padding: 0;
+       }
+       div {
+         width: 200px;
+         height: 200px;
+       }
+       .red {
+           background-color: red;
+           float: left;
+       }
+       .green {
+           background-color: green;
+           float: left;
+       }
+       .blue {
+           background-color: blue;
+           float: left;
+       }
+     </style>
+   </head>
+   <body>
+   <div class="red"></div>
+   <div class="green"></div>
+   <div class="blue"></div>
+       
+   </body>
+   </html>
+   ```
+
+   
+
+4. 浮动元素会受到上面元素的边界的影响
+
+   ```html
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+     <meta charset="UTF-8">
+     <title>Document</title>
+     <style>
+       /* 清除标签默认的margin和padding */
+       * {
+         margin: 0;
+         padding: 0;
+       }
+       div {
+         width: 200px;
+         height: 200px;
+       }
+       .red {
+           background-color: red;
+       }
+         /*green盒子受到red盒子对占一行的下边界影响只能浮动到第二行, 如果red不是块级元素, 就可以浮动到第一行了*/
+       .green {
+           background-color: green;
+           float: left;
+       }
+       .blue {
+           background-color: blue;
+       }
+     </style>
+   </head>
+   <body>
+   <div class="red"></div>
+   <div class="green"></div>
+   <div class="blue"></div>
+       
+   </body>
+   </html>
+   ```
+
+   5.浮动元素有特殊的显示效果
+
+   ​		1) 一行可以显示多个浮动元素
+
+   ​		2) 浮动元素都可以设置宽高,包括行内元素
+
+   注意点:
+
+   浮动的元素不能通过text-align:center或者margin: 0 auto, 让==浮动元素本身==水平居中
+
+4.1 清除浮动
+
+含义: ==清除子元素的浮动,造成父元素高度为0的影响
+
+原因: 子元素浮动后脱标 --> 不占位置
+
+目的:  需要父元素有高度, 从而不影响其他网页元素的布局
+
+方法: 给父元素设置overflow: hidden属性
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<title>Document</title>
+    <style>
+        /* 清除标签默认的margin和padding */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .father {
+            width: 400px;
+            background-color: pink;
+            /* 使父元素获得内容高度 */
+            overflow: hidden;
+        }
+        .son {
+            width: 100px;
+            height: 400px;
+            background-color: blue;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="father">
+        <div class="son"></div>
+    </div>
+</body>
+</html>
+```
+
+
+
+## 定位
+
+###### <img src="https://i.loli.net/2021/10/12/n7bLtVrQP4oZ5Sg.png" alt="image-20211012162453321" style="zoom:50%;" />
+
+
+
+#### 1.1 网页常见布局方式
+
+##### 1.标准流
+
+1. 块级元素独占一行 -->垂直布局
+2. 行内元素/行内块元素一行显示多个,当不够显示会自动换行显示 --> 水平布局
+
+##### 2.浮动
+
+1. 可以让原本垂直布局的块级元素变成水平布局
+
+##### 3.定位
+
+1. 可以让元素自由的摆放在网页的任意位置
+2. 一般用于==盒子之间的层叠情况== -->定位之后元素层级最高, 可以层叠在其他盒子上
+
+#### 2.1 使用定位的步骤
+
+##### 1.设置定位的方式
+
+属性名: position
+
+常见属性值:
+
+###### ![image-20211012164701529](https://i.loli.net/2021/10/12/mSlVMTe5Uq2fr8C.png)
+
+
+
+##### 2.设置偏移值
+
+偏移值设置分为两个方向,水平和垂直方向各选一个使用即可
+
+选取的原则一般是就近原则(离哪边近用哪个)
+
+###### ![image-20211012164836919](https://i.loli.net/2021/10/12/AWZhBnKgTwG17zl.png)
+
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    div {
+        width: 300px;
+        height: 300px;
+    }
+    .red{
+        background-color: red;
+    }
+    .blue{
+        /* 1.设置定位方式 为绝对定位*/
+        position: absolute;
+        /* 设置偏移值 */
+        top: 150px;
+        left: 150px;
+        background-color: blue;
+    }
+</style>
+<body>
+    <div class="red"></div>   
+    <div class="blue"></div>     
+</body>
+</html>
+```
+
+#### 3.1 静态定位
+
+介绍: 静态定位是默认值, 就是之前认识的标准流
+
+代码: position:static;
+
+注意点: 
+
+1.静态定位就是之前的标准流, 不能通过方位属性进行移动
+
+2.之后说的定位不包括静态定位, 一般特指后几种: 相对、绝对、固定
+
+
+
+#### 4.1 相对定位
+
+介绍: 自恋型定位, 相对于自己之前的位置进行移动
+
+代码: ==position:relative;==
+
+特点:
+
+1. 需要配合方位属性实现移动
+2. 相对于自己原来位置进行移动
+3. 在页面中占位置 --> 没有脱标(就是没有飞起来)
+
+应用场景:
+
+1. 配合绝对定位组CP (子绝父相)
+2. 用于小范围移动
+
+#### 5.1 绝对定位
+
+介绍: 拼爹型定位, 相对于非静态定位的父元素进行定位移动
+
+代码:  ==position: absolute;==
+
+特点:
+
+1. 需要配合方位属性实现移动
+2. 默认相对于浏览器可视区域进行移动
+3. 在页面中不占位置 --> 已经脱标
+
+应用场景:
+
+1. 配合相对定位组CP(子绝父相)
+
+#### 5.2 绝对定位到底相对于谁进行偏移
+
+1. 祖先元素中没有定位 --> 默认相对于浏览器进行移动
+2. 祖先元素中有定位 --> 相对于==离它最近有定位的祖先元素==进行移动
+
+#### 5.3 子绝父相介绍
+
+场景: 让子元素相对于父元素进行自由移动
+
+含义:
+
+子元素: 绝对定位
+
+父元素: 相对定位
+
+子绝父相好处:
+
+父元素是相对定位, 则对网页布局影响最小,因为相对定位是占位置的
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .father {
+        position: relative;
+        width: 600px;
+        height: 600px;
+        background-color: pink;
+    }
+
+    .son {
+        /* son父亲father是相对定位,son是绝对定位,所以是子绝父相 */
+        position: absolute;
+        left: 0;
+        top: 100px;
+        width: 400px;
+        height: 400px;
+        background-color: skyblue;
+    }
+    .sun {
+        /* sun父亲son是绝对定位,sun是绝对定位,所以是子绝父绝 */
+        position: absolute;
+        right: 20px;
+        bottom: 0;
+        width: 200px;
+        height: 200px;
+        background-color: blue;
+    }
+</style>
+<body>
+    <div class="father">
+        <div class="son">
+            <div class="sun"></div>
+        </div>
+    </div>
+</body>
+</html>
+```
+
+#### 6.1 固定定位
+
+介绍: 死心眼型定位, 相对于浏览器定位移动
+
+代码: ==position: fixed;==
+
+特点: 
+
+1. 需要配合方位属性实现移动
+2. 相对于浏览器可视区域进行移动
+3. 在页面中不占位置 --> 脱标
+
+应用场景:
+
+ 1. 让和盒子固定在屏幕中的某个位置
+
+    
 
