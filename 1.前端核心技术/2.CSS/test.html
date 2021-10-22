@@ -1,32 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        /* 清除标签默认的margin和padding */
-        * {
-            margin: 0;
-            padding: 0;
-        }
-        .father {
-            width: 400px;
-            background-color: pink;
-            /* 使父元素获得内容高度 */
-            overflow: hidden;
-        }
-        .son {
-            width: 100px;
-            height: 400px;
-            background-color: blue;
-            float: left;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .father {
+        position: absolute;
+        top: 100px;
+        left: 10px;
+        width: 300px;
+        height: 100px;
+        background-color: pink;
+        border-radius: 50%;
+        /* margin-left: 300px; */
+        z-index: 12;
+    }
+    .one {
+        position: absolute;
+        top: 100px;
+        left: 10px;
+        width: 300px;
+        height: 100px;
+        background-color: rgba(0,255,0,.5);
+        /* border-radius: 50%; */
+        /* margin-left: 300px; */
+        z-index: 9;
+    }
+    .two {
+        position: absolute;
+        top: 0;
+        left: 10px;
+        width: 300px;
+        height: 300px;
+        background-color: blue;
+        border-radius: 50%;
+    }
+    .two {
+        position: absolute;
+        top: 0;
+        left: 10px;
+        width: 300px;
+        height: 300px;
+        background-color: blue;
+        border-radius: 50%;
+    }
+    .t {
+        position: absolute;
+        top: 100px;
+        left: 10px;
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+        border-radius: 50%;
+        z-index: 11;
+    }
+  </style>
 </head>
 <body>
     <div class="father">
-        <div class="son"></div>
+        <!-- <input type="text"> -->
+    </div>
+    <div class="one"></div>
+    <div class="two">
+        <!-- <input type="text"> -->
+    </div>
+    <div class="t">
+        <!-- <input type="text"> -->
     </div>
 </body>
 </html>

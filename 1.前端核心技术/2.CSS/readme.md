@@ -168,13 +168,11 @@ typora-root-url: ./md_imgs
 >
 > ==同样：是对它们的父元素进行设置==
 
-#### ![image-20210930144505028](https://i.loli.net/2021/09/30/SpG2zy7N5UbBJ1P.png)
-
-
+#### ![image-20210930144505028](https://i.loli.net/2021/10/18/h62gKFtIQbrW8Sn.png)
 
 3.line-height行高
 
-##### ![image-20210930171849109](https://i.loli.net/2021/09/30/blQqXim1y85AUuG.png)
+##### ![image-20210930171849109](https://i.loli.net/2021/10/18/EoFTDBMUefrS3NH.png)
 
 ```html
 <!DOCTYPE html>
@@ -338,7 +336,7 @@ typora-root-url: ./md_imgs
 
 3.交集选择器
 
-###### ![image-20211008132412625](https://i.loli.net/2021/10/08/AZUcrt47pKbXzwx.png)
+###### ![image-20211008132412625](https://i.loli.net/2021/10/18/F9kLKO3SXjcJBD6.png)
 
 ```html
 <!DOCTYPE html>
@@ -424,7 +422,7 @@ typora-root-url: ./md_imgs
 </html>
 ```
 
-###### ![image-20211008140858125](https://i.loli.net/2021/10/08/dtScMNG6ryxZufs.png)
+###### ![image-20211008140858125](https://i.loli.net/2021/10/18/UmJ28fgHMvaByTW.png)
 
 
 
@@ -1106,6 +1104,16 @@ typora-root-url: ./md_imgs
 1. 水平方向的margin和padding布局中有效
 2. 垂直方向的margin和padding布局中无效
 
+
+
+##### 1.结构伪类选择器
+
+##### 2.伪元素
+
+##### 3.标准流
+
+
+
 ##### ![image-20211013135208491](https://i.loli.net/2021/10/13/Xs7ZQ3dNlE6SMjv.png)
 
 
@@ -1116,7 +1124,9 @@ typora-root-url: ./md_imgs
 
 ###### ![image-20211013135817140](https://i.loli.net/2021/10/13/zS7QIF9g1XJo86b.png)
 
+::first-letter修改第一个字符样式
 
+::first-line修改第一行样式
 
 ###### ![image-20211013135923616](https://i.loli.net/2021/10/13/2dyTtXF7iwMem6j.png)
 
@@ -1168,13 +1178,6 @@ typora-root-url: ./md_imgs
 
 
 ## 浮动
-
-1. 作用 
-2. 代码
-3. 特点
-4. 案例
-
-
 
 ##### 1.1 作用
 
@@ -1660,7 +1663,289 @@ typora-root-url: ./md_imgs
 
 应用场景:
 
- 1. 让和盒子固定在屏幕中的某个位置
+  1. 让和盒子固定在屏幕中的某个位置
 
-    
+
+
+![image-20211022143050859](https://i.loli.net/2021/10/22/JSzWbpGyYe4ZIxF.png)
+
+
+
+#### 7.1 元素层级问题 （显示的优先级）
+
+😀 不同布局方式元素的层级关系
+
+- 标准流 <  浮动 < 定位
+
+
+
+😀 不同定位之间的层级关系
+
+- 相对、绝对、固定定位的默认层级相同
+- 此时HTML中写在下面的元素层级更高， 会覆盖上面的元素
+
+
+
+#### 7.2 更改定位元素的层级
+
+😀 场景：改变定位元素的层级
+
+😀属性名： z-index
+
+😀属性值： 数字
+
+- 数字越大， 层级越高
+
+
+
+##  装饰
+
+#### 😀1. 垂直对齐方式(同级,父子不可以)
+
+##### 1.1 认识基线 (了解)
+
+基线: 浏览器文字类型元素排版中存在用于对齐的基线  (baseline)
+
+![image-20211022152652041](https://i.loli.net/2021/10/22/oY1CgldM42GpiES.png)
+
+##### 1.2 文字对齐问题
+
+场景: 解决==行内/行内块元素==垂直对齐问题
+
+**[问题]()** : 当图片和文字在一行中显示时, 其实底部不是对齐的,而是和文字基线对齐,而我们需要的文字底部和图片底部对齐
+
+
+
+##### 1.3 垂直对齐方式
+
+属性名:  vertical-align
+
+属性值: 
+
+###### ![image-20211022155447684](https://i.loli.net/2021/10/22/roZqV7kw9FA5hGi.png)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    img {
+        vertical-align: bottom;
+    }
+  </style>
+</head>
+<body>
+    <img src="./images/1.jpg" alt="">asdf我好帅啊帅爆了我好帅啊帅爆了adgfgfg
+</body>
+</html>
+```
+
+
+
+##### ( 拓展补充) 项目中vertical-align 可以解决的问题
+
+###### 😀1. 文本框和表单按钮无法对齐的问题
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    input {
+        /* 统一高度,解决高度不一致问题 */
+        height: 50px;
+        /* 自动内减, 解决由于文本框存在border和padding造成盒子被撑大的问题 */
+        box-sizing: border-box;
+        /* 
+            解决由于行内/行内块元素默认垂直对齐方式的影响,造成文本框和按钮不对齐问题
+            只有标准流存在这样的问题
+         */
+
+         /* 1.修改垂直对齐方式 */
+         /* vertical-align: middle; */
+
+         /* 2.浮动 */
+         float: left;
+
+         /* position: relative; */
+    }
+  </style>
+</head>
+<body>
+    <input type="text"><input type="button" value="百度一下">
+</body>
+</html>
+```
+
+
+
+###### 😀2. input标签和img标签无法对齐的问题
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    img {
+        vertical-align: bottom;
+    }
+  </style>
+</head>
+<body>
+    <img src="./images/1.jpg" alt=""><input type="text">
+</body>
+</html>
+```
+
+
+
+###### 😀3. div中的文本框, 文本框无法帖顶问题
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .father {
+        /* position: relative; */
+        width: 400px;
+        height: 400px;
+        background-color: pink;
+        /* margin-left: 300px; */
+    }
+    input {
+         /* 1.修改垂直对齐方式 */
+         vertical-align: top;
+
+         /* 2.浮动 */
+         /* float: left; */
+
+         /* position: absolute; */
+    }
+  </style>
+</head>
+<body>
+    <div class="father">
+        <input type="text">
+    </div>
+</body>
+</html>
+```
+
+###### 😀4. div不设高度由img标签撑开, 此时img标签下面会存在额外间隙的问题
+
+​	原因: 是浏览器预留给图片后面可能的文本, 而产生文本基线和图片底部之间的间隙,这就是==额外间隙的由来==
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .father {
+        /* position: relative; */
+        width: 400px;
+        background-color: pink;
+        /* margin-left: 300px; */
+    }
+    img {
+         /* 1.修改垂直对齐方式 */
+         vertical-align: bottom;
+
+         /* 2.浮动 */
+         /* float: left; */
+
+         /* position: absolute; */
+    }
+  </style>
+</head>
+<body>
+    <div class="father">
+    <img src="./images/1.jpg" alt="">
+    </div>
+</body>
+</html>
+```
+
+######  😀5. 使用line-height让img标签垂直居中问题
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .father {
+        /* position: relative; */
+        width: 600px;
+        height: 600px;
+        background-color: pink;
+        /* 虽然line-height可以让img垂直居中,但是还是会有垂直对齐问题,所以需要设置img */
+        line-height: 600px;
+        /* margin-left: 300px; */
+    }
+    img {
+         /* 1.修改垂直对齐方式 */
+         vertical-align: bottom;
+
+         /* 2.浮动 */
+         /* float: left; */
+
+         /* position: absolute; */
+    }
+  </style>
+</head>
+<body>
+    <div class="father">
+    <img src="./images/1.jpg" alt="">
+    </div>
+</body>
+</html>
+```
+
+
+
+😀注意点:
+
+- 学习浮动之后, 不推荐使用行内块元素让div一行中显示, 因为可能会出现垂直对齐问题
+- 推荐优先使用浮动完成效果
+
+
+
+#### 2. 光标类型
+
+场景: 设置鼠标光标在元素上时显示的方式
+
+属性名: cursor
+
+常见属性值:
+
+###### ![image-20211022165634460](https://i.loli.net/2021/10/22/pm9GTx6ikDwovM7.png)
+
+
+
+#### 3.边框圆角
+
+##### 3.1 边框圆角
+
+###### ![image-20211022170710700](https://i.loli.net/2021/10/22/gZiR5KqFoI8CeLy.png)
+
+##### 3.2 边框圆角的常见应用
+
+画一个正圆:
+
+1. 盒子必须是正方形
+2. 设置边框圆角为盒子宽高的一半 ---> border-radius: 50%;
+
+
+
+胶囊按钮:
 
