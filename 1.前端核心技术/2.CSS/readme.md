@@ -2,9 +2,13 @@
 typora-root-url: ./md_imgs
 ---
 
+# 电脑web学习大纲
+
+![image-20211026094309276](https://i.loli.net/2021/10/26/iaTu8GsDp2ewzZl.png)
+
 ## 基础选择器:
 
-1. 标签选择器
+###### 1.标签选择器
 
 ```html
 <!DOCTYPE html>
@@ -30,7 +34,7 @@ typora-root-url: ./md_imgs
 
 > ==标签选择器选择的是一类标签,而不是单独某一个==
 
-2.类选择器
+###### 2.类选择器
 
 ```html
 <!DOCTYPE html>
@@ -68,7 +72,7 @@ typora-root-url: ./md_imgs
 >
 > ==类除了使得标签样式多样化外,还可以减少代码的冗余==
 
-3.id选择器
+###### 3.id选择器
 
 ```html
 <!DOCTYPE html>
@@ -100,7 +104,7 @@ typora-root-url: ./md_imgs
 >
 > ==id一般配合js使用,非必要,都不要用id设置样式==
 
-4.通配符选择器
+###### 4.通配符选择器
 
 ```html
 <!DOCTYPE html>
@@ -168,6 +172,8 @@ typora-root-url: ./md_imgs
 >
 > ==同样：是对它们的父元素进行设置==
 
+###### 2.6 水平居中方法总结 margin : 0 auto
+
 #### ![image-20210930144505028](https://i.loli.net/2021/10/18/h62gKFtIQbrW8Sn.png)
 
 ###### 3.==line-height行高(垂直居中)==
@@ -200,7 +206,7 @@ typora-root-url: ./md_imgs
 </html>
 ```
 
-4.Chrome调试工具
+###### 4.Chrome调试工具
 
 1)选择元素
 
@@ -234,7 +240,7 @@ typora-root-url: ./md_imgs
 
 ------
 
-1.复合选择器
+###### 1.复合选择器
 
 ###### ![image-20211008112141324](https://i.loli.net/2021/10/08/KgjoT9WIdUzEXAF.png)
 
@@ -259,7 +265,7 @@ typora-root-url: ./md_imgs
 </html>
 ```
 
-
+###### 1.2子代选择器
 
 ###### ![image-20211008113004092](https://i.loli.net/2021/10/08/DArpUBQ1fRYJ2WF.png)
 
@@ -301,7 +307,7 @@ typora-root-url: ./md_imgs
 
 
 
-2.并集选择器
+###### 2.并集选择器
 
 ###### ![image-20211008131130874](https://i.loli.net/2021/10/08/HYkaPQyLdvpA5i2.png)
 
@@ -334,7 +340,7 @@ typora-root-url: ./md_imgs
 
 
 
-3.交集选择器
+###### 3.交集选择器
 
 ###### ![image-20211008132412625](https://i.loli.net/2021/10/18/F9kLKO3SXjcJBD6.png)
 
@@ -358,7 +364,7 @@ typora-root-url: ./md_imgs
 
 
 
-4.Emmet语法 (注意不能有空格)
+###### 4.Emmet语法 (注意不能有空格)
 
 vscode的快捷键
 
@@ -392,7 +398,7 @@ vscode的快捷键
 
 
 
-5.hover伪类选择器
+###### 5.hover伪类选择器
 
 ```html
 <!DOCTYPE html>
@@ -425,6 +431,117 @@ vscode的快捷键
 ```
 
 ###### ![image-20211008140858125](https://i.loli.net/2021/10/18/UmJ28fgHMvaByTW.png)
+
+
+
+###### 6、 属性选择器
+
+作用：根据元素中的属性或属性值来选取指定元素
+
+语法：[属性名]选取含有指定属性的元素
+
+ [属性名=“属性值”]选取含指定属性值的元素
+
+ [属性名^="属性值"] 选取属性值以指定内容开头的元素
+
+ [属性名$="属性值"] 选取属性值以指定内容结尾的元素
+
+ [属性名*="属性值"] 选取属性值包含指定内容的元素
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>自制像普通按钮的单选按钮</title>
+    <link type="text/css" rel="stylesheet" href="base.css" />
+    <style>
+		/* 把所有title属性值中包含bc的p标签设置为红色 */
+        p[title*="bc"] {
+            color: red;
+        }
+        /* 把所有title属性值中包含abc的p标签设置一个黄色背景 */
+        p[title="abc"] {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+	<p title="abc">我是红色的, 背景是黄色</p>
+	<p title="bcd">我是红色的</p>
+</body>
+</html>
+```
+
+ 
+
+###### 7、兄弟元素选择器
+
++选择器
+
+作用：选中一个元素后紧挨着的指定的兄弟元素
+
+语法：前一个+后一个（作用在后一个）
+
+~选择器
+
+作用：选中后边所有的制定兄弟元素
+
+语法：前一个~后边所有
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>自制像普通按钮的单选按钮</title>
+    <link type="text/css" rel="stylesheet" href="base.css" />
+    <style>
+        .option {
+            float: left;
+            margin-right: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 40px;
+            background: #fff;
+            border: 2px solid lightgrey;
+            font-size: 15px;
+            color: #808080;  
+        }
+        input[type="radio"]{
+            display: none;
+        }
+        /* 因为按钮中的文本应该是不可以选中的 */
+        .option-1::before {
+            content: "电信";
+        }
+        .option-2::before {
+            content: "联通";
+        }
+        
+        /* 
+        	这里不能用+因为#option-1的下一个兄弟元素不是.option-1,
+        	#option-2的下一个兄弟元素也不是.option-2
+        	需要用的话需要调整元素位置: #option-1 -> .option-1 -> #option-2 -> .option-2
+        */
+        #option-1:checked ~ .option-1,
+        #option-2:checked ~ .option-2{
+            border-color: #c68419;  
+            background: skyblue; 
+            color: #fff; 
+        }
+    </style>
+</head>
+<body>
+    <input type="radio" name="select" id="option-1" checked>
+    <input type="radio" name="select" id="option-2">
+    <label for="option-1" class="option option-1"></label>
+    <label for="option-2" class="option option-2"></label>
+</body>
+</html>
+```
+
+
 
 
 
@@ -481,7 +598,7 @@ vscode的快捷键
 
 ------
 
-1.块级元素
+###### 1.块级元素
 
 ###### ![image-20211008155803097](https://i.loli.net/2021/10/08/SxLcuTbFfEZnyVo.png)
 
@@ -489,25 +606,27 @@ vscode的快捷键
 
 
 
-2.行内元素
+###### 2.行内元素
 
 ###### ![image-20211008160030740](https://i.loli.net/2021/10/08/RgH3x812dUyS4un.png)
 
 
 
-3.行内块元素
+###### 3.行内块元素
 
 ###### ![image-20211008160825788](https://i.loli.net/2021/10/08/OlVAMBaci3FHsCD.png)
 
 
 
-4.元素显示模式转换
+###### 4.元素显示模式转换
 
 就是修改display属性
 
 ==一般只会转成块级元素或者行内块元素,极少转成行内元素==
 
 
+
+###### 拓展1:  HTML嵌套规范注意点
 
 ###### ![image-20211008164743855](https://i.loli.net/2021/10/08/5Hvr1nw2fkAYSsL.png)
 
@@ -796,11 +915,11 @@ vscode的快捷键
 
 ###### <img src="https://i.loli.net/2021/10/11/wl6xSZTXqML7mup.png" alt="image-20211011151657752" style="zoom:70%;" />
 
-布局顺序:
+###### ==布局顺序:==
 
 1.  从外往内, 从上往下
 
-每一个盒子的样式
+###### ==每一个盒子的样式书写顺序==
 
 1. 宽高
 2. 辅助的背景颜色
@@ -1657,7 +1776,7 @@ vscode的快捷键
 
 ###### 1.      ==先让子盒子往右移动父盒子的一半( left: 50%)==
 
-###### 2.      ==再让子盒子往左移动自己的一半(transform:  transformX(-50%)==
+###### 2.      ==再让子盒子往左移动自己的一半(transform:  translateX(-50%)==
 
 
 
@@ -1667,7 +1786,7 @@ vscode的快捷键
 
 ###### 1.      ==先让子盒子往下移动父盒子的一半( top: 50%)==
 
-###### 2.      ==再让子盒子往上移动自己的一半(transform:  transformY(-50%)==
+###### 2.      ==再让子盒子往上移动自己的一半(transform:  translateY(-50%)==
 
 
 
@@ -1679,7 +1798,7 @@ vscode的快捷键
 
 ###### 2.      ==再让子盒子往下移动父盒子的一半( top: 50%)==
 
-###### 3.      ==再让子盒子往左移动自己的一半(transform:  transform(-50% -50%)==
+###### 3.      ==再让子盒子往左移动自己的一半(transform:  translate(-50%, -50%)==
 
 
 
@@ -2106,4 +2225,8 @@ vscode的快捷键
 </body>
 </html>
 ```
+
+
+
+
 
