@@ -749,7 +749,7 @@ type属性值 （同input的按钮系列一样）
 
 常见属性:
 
-- selectd : 下拉菜单的默认选中
+- selected : 下拉菜单的默认选中
 
 ```html
 <!DOCTYPE html>
